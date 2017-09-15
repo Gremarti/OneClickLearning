@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainVBox" alignment="CENTER" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+   <MenuBar>
+     <menus>
+       <Menu mnemonicParsing="false" text="Save/Load Conditions">
+            <items>
+               <MenuItem fx:id="menuItemSave" mnemonicParsing="false" onAction="#menuItemSaveSelected" text="Save Conditions" />
+               <MenuItem fx:id="menuItemLoad" mnemonicParsing="false" onAction="#menuItemLoadSelected" text="Load Conditions" />
+            </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+	<Label alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" text="Launch a series of mining round all at once with specific settings.&#10;First, tell if you want to always keep or trash a pattern if it has a specific attribute.&#10;Then, tell if you want to keep or trash automatically according to any pattern measurement." wrapText="true" VBox.vgrow="ALWAYS">
+		<font>
+			<Font size="14.0" />
+		</font>
+		<VBox.margin>
+			<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+		</VBox.margin>
+	</Label>
+	<HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+		<VBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		</VBox.margin>
+		<Label maxHeight="1.7976931348623157E308" text="When the fast forward encounter a conflit between keep and trash, the priority is : " wrapText="true" HBox.hgrow="ALWAYS">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</Label>
+		<ChoiceBox fx:id="choiceBoxKeepTrash" maxHeight="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS">
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</ChoiceBox>
+	</HBox>
+	<ListView fx:id="listViewMeasure" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+		<VBox.margin>
+			<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+		</VBox.margin>
+	</ListView>
+	<HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+		<VBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		</VBox.margin>
+		<Label maxHeight="1.7976931348623157E308" text="Number of round to launch automatically : " wrapText="true" HBox.hgrow="ALWAYS">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</Label>
+		<TextField fx:id="textFieldNumberRound" maxHeight="1.7976931348623157E308" promptText="Any Value">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</TextField>
+	</HBox>
+	<HBox alignment="CENTER" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+		<VBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		</VBox.margin>
+		<Label maxHeight="1.7976931348623157E308" text="Number of seconds between each learning round : " wrapText="true" HBox.hgrow="ALWAYS">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</Label>
+		<TextField fx:id="textFieldSecondPerRound" maxHeight="1.7976931348623157E308" promptText="Any Value">
+			<font>
+				<Font size="14.0" />
+			</font>
+			<HBox.margin>
+				<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+			</HBox.margin>
+		</TextField>
+	</HBox>
+	<Button fx:id="buttonLaunch" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="Launch" VBox.vgrow="ALWAYS">
+		<VBox.margin>
+			<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+		</VBox.margin>
+		<font>
+			<Font name="System Bold" size="18.0" />
+		</font>
+	</Button>
+</VBox>

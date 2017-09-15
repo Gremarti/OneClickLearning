@@ -1,0 +1,19 @@
+/*noinspection CssUnusedSymbol*/
+.buttonKeep:pressed{
+	-fx-base: lightgreen;
+}
+
+/*noinspection CssUnusedSymbol*/
+.buttonKeep:selected{
+	-fx-base: lightgreen;
+}
+
+/*noinspection CssUnusedSymbol*/
+.buttonTrash:pressed{
+	-fx-base: salmon;
+}
+
+/*noinspection CssUnusedSymbol*/
+.buttonTrash:selected{
+	-fx-base: salmon;
+}

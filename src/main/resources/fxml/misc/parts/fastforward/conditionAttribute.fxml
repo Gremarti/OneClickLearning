@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Button?>
+<HBox fx:id="mainHBox" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+	<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" text="If" HBox.hgrow="ALWAYS">
+		<font>
+			<Font size="18.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</Label>
+	<ChoiceBox fx:id="choiceBoxAttributeName" maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</ChoiceBox>
+	<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" text="is" HBox.hgrow="ALWAYS">
+		<font>
+			<Font size="18.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</Label>
+	<ChoiceBox fx:id="choiceBoxAttributeState" maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</ChoiceBox>
+	<Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" text="then"
+	       HBox.hgrow="ALWAYS">
+		<font>
+			<Font size="18.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</Label>
+	<ToggleButton fx:id="buttonAlwaysKeep" mnemonicParsing="false" text="Always Keep">
+		<font>
+			<Font size="14.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</ToggleButton>
+	<ToggleButton fx:id="buttonAlwaysTrash" mnemonicParsing="false" text="Always Trash">
+		<font>
+			<Font size="14.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</ToggleButton>
+	<Separator maxHeight="1.7976931348623157E308" orientation="VERTICAL" HBox.hgrow="ALWAYS">
+		<HBox.margin>
+			<Insets left="10.0" right="10.0"/>
+		</HBox.margin>
+	</Separator>
+	<Button fx:id="buttonRemoveCondition" mnemonicParsing="false" text="Remove Condition" HBox.hgrow="ALWAYS">
+		<font>
+			<Font size="14.0"/>
+		</font>
+		<HBox.margin>
+			<Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+		</HBox.margin>
+	</Button>
+</HBox>

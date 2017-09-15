@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="mainHBox" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+	<ToggleButton fx:id="buttonKeep" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Keep" textAlignment="CENTER">
+		<font>
+			<Font size="14.0" />
+		</font>
+		<HBox.margin>
+			<Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+		</HBox.margin>
+	</ToggleButton>
+
+	<ToggleButton fx:id="buttonTrash" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Trash" textAlignment="CENTER">
+		<font>
+			<Font size="14.0" />
+		</font>
+		<HBox.margin>
+			<Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+		</HBox.margin>
+	</ToggleButton>
+	<Separator orientation="VERTICAL" HBox.hgrow="NEVER">
+		<HBox.margin>
+			<Insets left="5.0" right="5.0" />
+		</HBox.margin>
+	</Separator>
+   <VBox HBox.hgrow="ALWAYS">
+      <children>
+      
+      	<Label fx:id="labelPattern" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label">
+      		<font>
+      			<Font size="14.0" />
+      		</font>
+      	</Label>
+         <HBox VBox.vgrow="ALWAYS">
+            <children>
+               <Label fx:id="labelExploitation" text="Label" />
+               <Separator maxHeight="1.7976931348623157E308" orientation="VERTICAL">
+                  <HBox.margin>
+                     <Insets left="5.0" right="5.0" />
+                  </HBox.margin>
+               </Separator>
+               <Label fx:id="labelIndicator" text="Label" />
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>
