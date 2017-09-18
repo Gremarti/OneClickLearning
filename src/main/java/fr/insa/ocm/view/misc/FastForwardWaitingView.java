@@ -64,19 +64,19 @@ public class FastForwardWaitingView {
 	}
 
 	public void bindCurrentOperation(StringProperty currentOpration){
-		labelCurrentOperation.textProperty().bind(currentOpration);
+		Platform.runLater(() -> labelCurrentOperation.textProperty().bind(currentOpration));
 	}
 
 	public void bindCurrentTime(StringProperty remainingTime){
-		labelTime.textProperty().bind(remainingTime);
+		Platform.runLater(() -> labelTime.textProperty().bind(remainingTime));
 	}
 
 	public void bindProgressMining(DoubleProperty progressMining){
-		progressBarMining.progressProperty().bind(progressMining);
+		Platform.runLater(() -> progressBarMining.progressProperty().bind(progressMining));
 	}
 
 	public void bindProgressLearning(DoubleProperty progressLearning) {
-		progressBarRound.progressProperty().bind(progressLearning);
+		Platform.runLater(() -> progressBarRound.progressProperty().bind(progressLearning));
 	}
 
 	private void buttonAbortFinishPressed(){

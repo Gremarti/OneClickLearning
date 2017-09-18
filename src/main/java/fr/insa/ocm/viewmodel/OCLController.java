@@ -21,19 +21,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * Note: Singleton class.
+ */
 public class OCLController {
 
 	public static final String VERSION = "0.5.0.1";
 
 	private static OCLController INSTANCE = new OCLController();
 
-	private volatile boolean stopRequested = false;
-
+	// The information about the last mining round.
 	private List<Pattern> interestingPattern;
 	private List<Pattern> neutralPattern;
 	private List<Pattern> trashedPattern;
-
-	private String pathDataFile = null;
 
 	// Keeps a track of the last fastforward done.
 	private FastForward fastForward;
@@ -43,7 +44,6 @@ public class OCLController {
 	private CoactiveLearning.CoactiveType coactiveLearningSelected;
 	private Cache.CacheType cacheTypeSelected;
 
-	//This constructor is valid only if used by the Application launcher
 	private OCLController(){
 		INSTANCE = this;
 
@@ -64,12 +64,8 @@ public class OCLController {
 		OCMManager.initialize(INSTANCE.wrapperTypeSelected, pathDataFile);
 		OCMManager.algorithmManagerStartMining();
 
-		INSTANCE.pathDataFile = pathDataFile;
-
 		InfoAlgorithm.setPaused(false);
 		Monitor.startMonitoring();
-
-		INSTANCE.waitForOCMResults();
 
 		DebugLogger.printDebug("OCLController: initialized correctly.");
 	}
@@ -79,21 +75,15 @@ public class OCLController {
 		Monitor.pauseMonitoring();
 		OCMManager.requestStop();
 
-		INSTANCE.stopRequested = false;
-
 		INSTANCE.interestingPattern = new ArrayList<>();
 		INSTANCE.neutralPattern = new ArrayList<>();
 		INSTANCE.trashedPattern = new ArrayList<>();
-
-		INSTANCE.pathDataFile = pathDataFile;
 
 		DebugLogger.printDebug("OCLController: Reloading OCMManager.");
 		OCMManager.reload(INSTANCE.wrapperTypeSelected,	INSTANCE.cacheTypeSelected, INSTANCE.coactiveLearningSelected, pathDataFile);
 		OCMManager.algorithmManagerStartMining();
 
 		Monitor.resumeMonitoring();
-
-		INSTANCE.waitForOCMResults();
 
 		DebugLogger.printDebug("OCLController: Reloaded correctly.");
 	}
@@ -150,12 +140,10 @@ public class OCLController {
 		final DoubleProperty progressLearning = new SimpleDoubleProperty(0d);
 		final DoubleProperty progressMining = new SimpleDoubleProperty(0d);
 
-		Platform.runLater(() -> {
-			fastForwardWaitingView.bindCurrentOperation(currentOperation);
-			fastForwardWaitingView.bindCurrentTime(remainingTime);
-			fastForwardWaitingView.bindProgressLearning(progressLearning);
-			fastForwardWaitingView.bindProgressMining(progressMining);
-		});
+		fastForwardWaitingView.bindCurrentOperation(currentOperation);
+		fastForwardWaitingView.bindCurrentTime(remainingTime);
+		fastForwardWaitingView.bindProgressLearning(progressLearning);
+		fastForwardWaitingView.bindProgressMining(progressMining);
 
 		Thread threadFF = new Thread(fastForward);
 		threadFF.setName("FastForward");
@@ -164,16 +152,11 @@ public class OCLController {
 
 		try {
 			while (!fastForward.isFinished()) {
-				String strCurrentOperation = fastForward.getCurrentOperation();
-				String strRemainingTime = fastForward.getRemainingTime();
-				Double dProgressLearning = fastForward.getProgressLearning();
-				Double dProgressMining = fastForward.getProgressMining();
-
 				Platform.runLater(() -> {
-					currentOperation.setValue("Current Operation: "+ strCurrentOperation + ".");
-					remainingTime.setValue("Estimated time before completion: "+ strRemainingTime);
-					progressLearning.setValue(dProgressLearning);
-					progressMining.setValue(dProgressMining);
+					currentOperation.setValue("Current Operation: "+ fastForward.getCurrentOperation() + ".");
+					remainingTime.setValue("Estimated time before completion: "+ fastForward.getRemainingTime());
+					progressLearning.setValue(fastForward.getProgressLearning());
+					progressMining.setValue(fastForward.getProgressMining());
 				});
 				Thread.sleep(100);
 			}
@@ -181,111 +164,12 @@ public class OCLController {
 			e.printStackTrace();
 		}
 
-//		final int nbIter = 100;
-//		try {
-//			for (int i = 0; i < nbRound && !INSTANCE.stopRequested && !INSTANCE.ffStopRequested; ++i) {
-//				fastForwardWaitingView.setCurrentOperation("Mining");
-//				for (int j = 0; j < nbIter && !INSTANCE.stopRequested && !INSTANCE.ffStopRequested; ++j) {
-//					Thread.sleep((long)secPerRound*1000/nbIter);
-//					double pbm = (j+1.)/nbIter;
-//					fastForwardWaitingView.setProgressBarMining(pbm);
-//
-//					int remainingTimeSec = (int)((nbRound-i) * secPerRound - (secPerRound/nbIter) * j);
-//					fastForwardWaitingView.setCurrentTime(remainingTimeSec/60 + " min " + remainingTimeSec%60 + " sec");
-//				}
-//
-//				// We process the data gathered by the mining algorithms.
-//				fastForwardWaitingView.setCurrentOperation("Processing data");
-//
-//
-//
-//				Rank<Pattern> rank = OCMManager.getNewRanking(INSTANCE.interestingPattern, INSTANCE.neutralPattern, INSTANCE.trashedPattern);
-//				Rank<Pattern> rawRank = new Rank<>(rank);
-//
-//				if(mainPriority.equals(Condition.ActionPatternChoice.TRASH)){
-//					INSTANCE.trashedPattern = computeListPattern(rank, rawRank, listCondition, Condition.ActionPatternChoice.TRASH);
-//					rank.removeAll(INSTANCE.trashedPattern);
-//					INSTANCE.interestingPattern = computeListPattern(rank, rawRank, listCondition, Condition.ActionPatternChoice.KEEP);
-//					rank.removeAll(INSTANCE.interestingPattern);
-//					INSTANCE.neutralPattern = new ArrayList<>(rank);
-//				}else{
-//					INSTANCE.interestingPattern = computeListPattern(rank, rawRank, listCondition, Condition.ActionPatternChoice.KEEP);
-//					rank.removeAll(INSTANCE.interestingPattern);
-//					INSTANCE.trashedPattern = computeListPattern(rank, rawRank, listCondition, Condition.ActionPatternChoice.TRASH);
-//					rank.removeAll(INSTANCE.trashedPattern);
-//					INSTANCE.neutralPattern = new ArrayList<>(rank);
-//				}
-//
-//
-//				// Print in the error channel the results of the automated selection.
-//
-//				System.err.println("Kept Patterns :");
-//				INSTANCE.interestingPattern.forEach(System.err::println);
-//				System.err.println("Neutral Patterns :");
-//				INSTANCE.neutralPattern.forEach(System.err::println);
-//				System.err.println("Trashed Patterns :");
-//				INSTANCE.trashedPattern.forEach(System.err::println);
-//				System.err.println("");
-//
-//				int nbPatternRank = rawRank.size();
-//				double nbQuality = INSTANCE.interestingPattern.size() - INSTANCE.trashedPattern.size();
-//				DebugLogger.printQuality(i +";"+ ((nbQuality/nbPatternRank)+1)/2);
-//
-//				double pbr = (i+1.)/nbRound;
-//				fastForwardWaitingView.setProgressBarRound(pbr);
-//			}
-//			fastForwardWaitingView.setCurrentOperation("Finished");
-//			fastForwardWaitingView.setCurrentTime("Finished");
-//			MainView.getCurrentMainView().refreshKeptPatternsList();
-//		}catch(InterruptedException e){
-//			e.printStackTrace();
-//		}
-
 		fastForwardWaitingView.setHasFinished(true);
 	}
 
 	//********** Internal Methods **********//
 
-	private void waitForOCMInitialization(){
-		try {
-			while(!OCMManager.isInitialized() || !OCMManager.algorithmManagerIsMining()){
-				Thread.sleep(500);
-				if(stopRequested){
-					return;
-				}
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void waitForOCMResults(){
-//		try{
-//			DebugLogger.printDebug("OCLController: Trying to find better result.");
-//			Rank<Pattern> rank = OCMManager.getNewRanking(interestingPattern, neutralPattern, trashedPattern);
-//			while (rank.size() <= 0){
-//				Thread.sleep(250);
-//				DebugLogger.printDebug("OCLController: Trying to find better result.");
-//				rank = OCMManager.getNewRanking(interestingPattern, neutralPattern, trashedPattern);
-//				if(stopRequested){
-//					return;
-//				}
-//			}
-//			synchronized (OCLController.class) {
-//				userRank.clear();
-//				userRank.addAll(rank);
-//			}
-//		} catch (InterruptedException e){
-//			e.printStackTrace();
-//		}
-	}
-
 	//********** Getters/Setters Methods **********//
-
-	// Getters //
-	public static String getPathDataFile(){
-		return INSTANCE.pathDataFile;
-	}
 
 	// Setters //
 	public static void setPatternList(List<Pattern> interestingPattern, List<Pattern> neutralPattern, List<Pattern> trashedPattern){
@@ -305,7 +189,6 @@ public class OCLController {
 	}
 
 	public static void requestStop(){
-		INSTANCE.stopRequested = true;
 		DebugLogger.printDebug("OCLController: Stopping the controller.");
 		OCMManager.requestStop();
 		InfoAlgorithm.requestStop();
