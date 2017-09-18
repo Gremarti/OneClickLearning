@@ -2,7 +2,7 @@
 
 pwd=`pwd`
 
-cd "./ressource"
+cd "./ressources/"
 rm -v *.att *.tmp *.*dat
 
 cd "../log"
