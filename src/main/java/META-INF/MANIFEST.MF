@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: fr.insa.ocm.view.OCLApplication
+Main-Class: fr.insa.ocm.OCLApplication
