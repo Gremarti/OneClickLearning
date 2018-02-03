@@ -1,6 +1,6 @@
 package fr.insa.ocm.model.wrapper.realkd;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import de.unibonn.realkd.data.table.DataFormatException;
 import de.unibonn.realkd.data.table.DataTable;
 import de.unibonn.realkd.data.table.DataTableFromCSVFileBuilder;

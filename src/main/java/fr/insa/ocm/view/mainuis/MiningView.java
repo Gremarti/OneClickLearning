@@ -1,6 +1,6 @@
 package fr.insa.ocm.view.mainuis;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import fr.insa.ocm.model.OCMManager;
 import fr.insa.ocm.model.wrapper.api.Pattern;
 import fr.insa.ocm.view.misc.parts.mining.PatternView;

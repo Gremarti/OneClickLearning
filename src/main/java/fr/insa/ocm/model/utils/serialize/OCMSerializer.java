@@ -2,7 +2,7 @@ package fr.insa.ocm.model.utils.serialize;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import fr.insa.ocm.model.OCMManager;
 
 import java.io.BufferedWriter;

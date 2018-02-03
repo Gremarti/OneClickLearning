@@ -1,7 +1,7 @@
 package fr.insa.ocm.model.wrapper.spmf;
 
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.ArrayList;

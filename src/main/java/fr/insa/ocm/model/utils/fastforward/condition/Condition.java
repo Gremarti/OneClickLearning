@@ -2,7 +2,7 @@ package fr.insa.ocm.model.utils.fastforward.condition;
 
 
 import com.google.gson.annotations.Expose;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import fr.insa.ocm.model.wrapper.api.Pattern;
 
 import java.util.List;

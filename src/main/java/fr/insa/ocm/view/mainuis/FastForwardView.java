@@ -1,6 +1,6 @@
 package fr.insa.ocm.view.mainuis;
 
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import fr.insa.ocm.model.DebugLogger;
 import fr.insa.ocm.model.utils.serialize.condition.ConditionsDeserializer;
 import fr.insa.ocm.model.utils.serialize.condition.ConditionsSerializer;

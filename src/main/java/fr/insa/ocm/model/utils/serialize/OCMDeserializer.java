@@ -1,7 +1,7 @@
 package fr.insa.ocm.model.utils.serialize;
 
 import com.google.gson.*;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 import fr.insa.ocm.model.DebugLogger;
 import fr.insa.ocm.model.OCMManager;
 import fr.insa.ocm.model.oneclicklearning.bandit.CesaBianciBandit;
